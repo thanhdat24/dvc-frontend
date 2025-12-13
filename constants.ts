@@ -1,4 +1,18 @@
-import { FileText, Key, Upload, ShieldCheck, AlertCircle, Terminal, Search, RefreshCw, WifiOff, Loader2 } from 'lucide-react';
+import {
+  FileText,
+  Key,
+  Upload,
+  ShieldCheck,
+  AlertCircle,
+  Terminal,
+  Search,
+  RefreshCw,
+  WifiOff,
+  Loader2,
+  Sun,
+  Moon
+} from 'lucide-react';
+
 
 export const DEFAULT_API_BASE_URL = ""; // same-origin
 
@@ -17,5 +31,7 @@ export const ICONS = {
   Search,
   RefreshCw,
   WifiOff,
-  Loader2
+  Loader2,
+  Sun,
+  Moon
 };
