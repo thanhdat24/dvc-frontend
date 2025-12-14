@@ -95,7 +95,7 @@ const TokenModal: React.FC<Props> = ({ isOpen, isLoading, error, onSaveToken, on
           />
           
           <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-            * Mở trang DVC -> F12 -> Network -> Filter "search" -> Copy "Authorization" header.
+            Copy "Authorization" header.
           </p>
         </div>
 
