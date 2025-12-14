@@ -1,4 +1,4 @@
-import { connectDB } from '../_db';
+import { connectDB } from '../_db.js';
 import { hash } from 'bcryptjs';
 
 export default async function handler(req, res) {
