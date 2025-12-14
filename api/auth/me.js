@@ -1,5 +1,5 @@
-import { readSession } from "../_auth";
-import { getDb } from "../_db";
+import { readSession } from "../_auth.js";
+import { getDb } from "../_db.js";
 
 export default async function handler(req, res) {
   const s = readSession(req);

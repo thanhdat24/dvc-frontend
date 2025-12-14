@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { getDb } from "../_db";
+import { getDb } from "../_db.js";
 import { createSession, setSessionCookie } from "../_auth";
 
 export default async function handler(req, res) {

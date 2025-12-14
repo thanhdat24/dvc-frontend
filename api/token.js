@@ -1,6 +1,6 @@
-import { readSession } from "./_auth";
-import { getDb } from "./_db";
-import { encryptToken } from "./_crypto";
+import { readSession } from "./_auth.js";
+import { getDb } from "./_db.js";
+import { encryptToken } from "./_crypto.js";
 
 export default async function handler(req, res) {
   const s = readSession(req);
