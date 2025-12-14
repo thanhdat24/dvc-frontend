@@ -1,18 +1,22 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
-let cachedClient = null;
+const uri = process.env.MONGODB_URI;
 
-export async function connectDB() {
-  if (cachedClient) return cachedClient.db();
+if (!uri) {
+  throw new Error("Missing MONGODB_URI");
+}
 
-  const uri = process.env.MONGODB_URI;
-  if (!uri) {
-    throw new Error('MONGODB_URI not set');
-  }
+let client;
+let clientPromise;
 
-  const client = new MongoClient(uri);
-  await client.connect();
+if (!global._mongoClientPromise) {
+  client = new MongoClient(uri);
+  global._mongoClientPromise = client.connect();
+}
 
-  cachedClient = client;
-  return client.db();
+clientPromise = global._mongoClientPromise;
+
+export async function getDb() {
+  const client = await clientPromise;
+  return client.db(); // dùng default database trong URI
 }
