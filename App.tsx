@@ -4,7 +4,7 @@ import LoginModal from './components/LoginModal';
 import TokenModal from './components/TokenModal';
 import { fetchAllDossiers } from './services/api';
 import { DossierItem } from './types';
-import { ICONS } from './constants';
+import { DEFAULT_API_BASE_URL, ICONS } from './constants';
 import {
   Settings,
   RefreshCw,
@@ -30,7 +30,7 @@ type FetchResult = {
 };
 
 const App: React.FC = () => {
-  // Demo mode only (Token đã chuyển lên DB)
+  // Demo mode
   const [useMock, setUseMock] = useState<boolean>(() => localStorage.getItem('USE_MOCK') === 'true');
   const [showSettings, setShowSettings] = useState<boolean>(false);
 
@@ -129,10 +129,9 @@ const App: React.FC = () => {
     setSauData([]);
     setHasFetched(false);
 
-    // Demo mode: cho phép services/api.ts trả fake hoặc bạn tự fake ở đó
+    // Demo mode: cho phép services/api.ts trả fake
+    // Server-side mode: token = undefined
     const result: FetchResult = await fetchAllDossiers(
-      // @ts-ignore - nếu file services/api.ts bạn đang dùng signature (token, baseUrl, useMock)
-      // thì giữ lại useMock tương thích; còn nếu bạn đã đổi sang fetchAllDossiers() thì xoá 2 args dưới.
       undefined,
       undefined,
       currentMock
@@ -241,6 +240,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans pb-12 transition-colors duration-200">
+      
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700 sticky top-0 z-50 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -265,7 +265,7 @@ const App: React.FC = () => {
                 </span>
               ) : showTokenModal && !useMock ? (
                 <span className="text-xs font-bold text-orange-500 dark:text-orange-400 flex items-center gap-1">
-                  <Lock size={10} /> Cần Token
+                  <ICONS.Key size={10} /> Cần Token
                 </span>
               ) : unauthorized ? (
                 <span className="text-xs font-bold text-red-500 dark:text-red-400 flex items-center gap-1">
@@ -527,6 +527,7 @@ const App: React.FC = () => {
         isLoading={tokenSaving}
         error={tokenError}
         onSaveToken={onSaveToken}
+        onClose={!loading && hasFetched ? () => setShowTokenModal(false) : undefined} 
       />
     </div>
   );

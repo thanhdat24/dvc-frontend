@@ -10,9 +10,12 @@ import {
   WifiOff,
   Loader2,
   Sun,
-  Moon
+  Moon,
+  X,
+  User,
+  Lock,
+  CheckCircle
 } from 'lucide-react';
-
 
 export const DEFAULT_API_BASE_URL = ""; // same-origin
 
@@ -33,5 +36,9 @@ export const ICONS = {
   WifiOff,
   Loader2,
   Sun,
-  Moon
+  Moon,
+  X,
+  User,
+  Lock,
+  CheckCircle
 };
