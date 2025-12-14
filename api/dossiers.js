@@ -1,6 +1,6 @@
-import { readSession } from "./_auth";
+import { readSession } from "./_auth.js";
 import { getDb } from "./_db";
-import { decryptToken } from "./_crypto";
+import { decryptToken } from "./_crypto.js";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).json({ error: "Method Not Allowed" });
